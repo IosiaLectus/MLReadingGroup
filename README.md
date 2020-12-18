@@ -7,5 +7,5 @@ We will meet bi-weekly on Saturdays at noon EST/6pm GMT, starting on Saturday, 1
 
 ## Reading List
 
-1. ["Learning representation by backpropogating errors"](https://www.cs.toronto.edu/~hinton/absps/naturebp.pdf)
+1. ["Learning representation by backpropogating errors"](https://www.cs.toronto.edu/~hinton/absps/naturebp.pdf) (19 Dec 2020)
 2. TBD
