@@ -10,8 +10,8 @@ from sklearn.metrics import r2_score, mean_squared_error #- Used for gauging how
 
 
 ############################## CUSTOM FUNCTIONS ##############################
-def fun(x, y):
-    return np.sin(x + y)
+def fun(x):
+    return np.sin(x)
 
 
 ##############################################################################
@@ -19,25 +19,19 @@ def fun(x, y):
 
 ################################## START #####################################
 t0 = time.time() #- Start time.
-num_in = 2 #- Number of inputs.
+num_in = 1 #- Number of inputs.
 num_hidden = 120 #- Number of hidden nodes.
 num_out = 1 #- Number of outputs
 
-x_min = -3 #- Minimum x value used as input.
-x_max = 3 #- Maximum x value used as input.
-num_x = 120 #- Number of x values used for input.
-y_min = -3 #- Minimum y value used as input.
-y_max = 3 #- Maximum y value used as input.
-num_y = 120 #- Number of y values used for input.
-y0 = 1 #- Initial condition.
-x = np.linspace(x_min, x_max, num_x)
-y = np.linspace(y_min, y_max, num_y)
-data_in = np.asarray([x, y]).T
-data_in = torch.tensor(data_in, dtype = torch.float)
-#out_theory = np.asarray(np.sin(x + y))
-out_theory = fun(x, y)
+x_min_train = -3 #- Minimum x value used as input.
+x_max_train = 3 #- Maximum x value used as input.
+num_x_train = 50 #- Number of x values used for input.
+x_train = np.linspace(x_min_train, x_max_train, num_x_train)
+data_in = torch.tensor(x_train, dtype = torch.float)
+data_in = data_in.view([num_x_train, num_in])
+out_theory = fun(x_train)
 out_theory = torch.tensor(out_theory, dtype = torch.float)
-out_theory = out_theory.view([num_x, num_out])
+out_theory = out_theory.view([num_x_train, num_out])
 ##############################################################################
 
 
@@ -77,19 +71,24 @@ while error > error_threshold:
 ##############################################################################
 
 ################################## FIGURES ###################################
-x = np.linspace(-5, 5, 100)
-y = np.linspace(-5, 5, 100)
-data_in = np.asarray([x, y]).T
+x_min_test = -5
+x_max_test = 5
+num_x_test = 100
+x_test = np.linspace(x_min_test, x_max_test, num_x_test)
+data_in = x_test
 data_in = torch.tensor(data_in, dtype = torch.float)
+data_in = data_in.view([num_x_test, num_in])
 out = model(data_in)
 out = out.detach().numpy()
 
-fun_real =fun(x, y) 
+fun_real =fun(x_test)
 fun_pred = out
 
 plt.figure(0)
-plt.scatter(x + y, fun_pred, c= 'red', s = 6, label = 'Prediction')
-plt.scatter(x + y, fun_real, s = 6, label = 'Theory')
+plt.scatter(x_test, fun_pred, c = 'orange', s = 6, label = 'Prediction')
+plt.scatter(x_test, fun_real, s = 6, label = 'Theory')
+plt.axvline(x = x_min_train, c = 'red')
+plt.axvline(x = x_max_train, label = 'Training boundaries', c = 'red')
 plt.legend()
 plt.savefig(os.getcwd() + '/approx-fun.png', dpi = 600)
 plt.show()
