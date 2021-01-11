@@ -10,8 +10,8 @@ We will meet bi-weekly on Saturdays at noon EST/6pm GMT, starting on Saturday, 1
 1. ["Learning representation by backpropogating errors"](https://www.cs.toronto.edu/~hinton/absps/naturebp.pdf) (19 Dec 2020)
 2. ["A high-bias, low-variance introduction to Machine Learning for physicists"](https://arxiv.org/pdf/1803.08823.pdf)
      1. Chapters I-VI (10 January 2021)
-     2. Chapters VII and VIII? (23 January 2021)
-     3. Chapter IX? (6 February 2021)
+     2. Chapters VII (23 January 2021)
+     3. Chapter VIII and IX? (6 February 2021)
      4. Chapters X-XII? (20 February 2021)
 
 ## Random Links
